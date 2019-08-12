@@ -16,6 +16,7 @@ router.post('/', (req, res) => {
       date: date ? new Date(date) : new Date(),
     };
     doc.exercises.push(exercise);
+    doc.exercises.sort((a, b) => (a.date > b.date ? -1 : 1));
     doc
       .save()
       .then(result =>

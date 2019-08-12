@@ -22,10 +22,12 @@ app.get('/', (req, res) => {
 });
 
 const newUserRoutes = require('./api/routes/new_user');
-const exerciseRoutes = require('./api/routes/add_exercise');
+const addExerciseRoutes = require('./api/routes/add_exercise');
+const getExerciseRoutes = require('./api/routes/get_exercise');
 
 app.use('/api/exercise/new-user', newUserRoutes);
-app.use('/api/exercise/add', exerciseRoutes);
+app.use('/api/exercise/add', addExerciseRoutes);
+app.use('/api/exercise/log', getExerciseRoutes);
 
 // Not found middleware
 app.use((req, res, next) => next({ status: 404, message: 'not found' }));
