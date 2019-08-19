@@ -5,19 +5,21 @@ const router = express.Router();
 const User = require('../models/user.model');
 
 router.post('/', (req, res) => {
-  const { username } = req.body;
+  const { userName } = req.body;
+  if (!userName) return res.json({ error: 'Please Enter Username' });
   const user = new User({
-    username,
+    userName,
   });
   user
     .save()
     .then(result => {
-      const { username: dbUserName, _id } = result;
-      res.json({ dbUserName, _id });
+      const { userName: dbUserName, _id, exercises } = result;
+      res.json({ userName: dbUserName, _id, exercises });
     })
     .catch(err => {
+      console.log(err);
       if (err.code === 11000) {
-        res.json({ error: `Username ${username} is already taken` });
+        res.json({ error: `Username ${userName} is already taken` });
       }
     });
 });

@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
     default: shortid.generate,
     required: true,
   },
-  username: {
+  userName: {
     type: String,
     unique: true,
     required: true,

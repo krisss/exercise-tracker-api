@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
     const exercise = {
       description,
       duration,
-      date: date ? new Date(date) : new Date(),
+      date,
     };
     doc.exercises.push(exercise);
     doc.exercises.sort((a, b) => (a.date > b.date ? -1 : 1));
@@ -21,11 +21,9 @@ router.post('/', (req, res) => {
       .save()
       .then(result =>
         res.json({
-          username: doc.username,
-          description,
-          duration,
-          _id: userId,
-          date: exercise.date,
+          userName: result.userName,
+          _id: result._id,
+          exercises: result.exercises,
         })
       )
       .catch(err => res.json({ error: 'Please enter required fields' }));
