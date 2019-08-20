@@ -4,12 +4,14 @@ const User = require('../models/user.model');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  const { userId, description, duration, date } = req.body;
+  const { userId, duration, date } = req.body;
+  let { description } = req.body;
   User.findById(userId, (err, doc) => {
     if (err) return console.log(err);
     if (!doc) {
       res.json({ err: 'Unknown user ID' });
     }
+    description = description.charAt(0).toUpperCase() + description.slice(1);
     const exercise = {
       description,
       duration,
