@@ -11,13 +11,19 @@ router.get('/', (req, res) => {
     if (err) return console.log('err');
     if (!doc) return res.json({ error: 'No user found, please check your ID' });
     let result = doc.exercises;
+    const hasExercise = result.length > 0;
     result = result.filter(exercise =>
       moment(exercise.date).isBetween(from || '1970-01-01', to)
     );
     if (limit) {
       result = result.slice(0, limit);
     }
-    res.json({ _id: doc._id, userName: doc.userName, exercises: result });
+    res.json({
+      _id: doc._id,
+      userName: doc.userName,
+      exercises: result,
+      hasExercise,
+    });
   });
 });
 
