@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
-const shortid = require('shortid');
+const { isEmail } = require('validator');
 
 const userSchema = mongoose.Schema({
-  _id: {
-    type: String,
-    default: shortid.generate,
-    required: true,
-  },
   userName: {
     type: String,
     unique: true,
+    required: true,
+    trim: true,
+    validate: [isEmail],
+  },
+  hash: {
+    type: String,
     required: true,
   },
   exercises: [

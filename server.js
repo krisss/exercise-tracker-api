@@ -21,12 +21,14 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/views/index.html`);
 });
 
-const newUserRoutes = require('./api/routes/new_user');
+const newUserRoutes = require('./api/routes/register');
+const loginRoute = require('./api/routes/login');
 const addExerciseRoutes = require('./api/routes/add_exercise');
 const getExerciseRoutes = require('./api/routes/get_exercise');
 const deleteExerciseRoutes = require('./api/routes/delete_exercise');
 
-app.use('/api/exercise/new-user', newUserRoutes);
+app.use('/api/new-user', newUserRoutes);
+app.use('/api/login', loginRoute);
 app.use('/api/exercise/add', addExerciseRoutes);
 app.use('/api/exercise/log', getExerciseRoutes);
 app.use('/api/exercise/delete', deleteExerciseRoutes);

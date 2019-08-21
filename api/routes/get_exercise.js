@@ -9,7 +9,10 @@ router.get('/', (req, res) => {
   if (!userId) return res.json({ error: 'Please enter user ID' });
   User.findById(userId, (err, doc) => {
     if (err) return console.log('err');
-    if (!doc) return res.json({ error: 'No user found, please check your ID' });
+    if (!doc)
+      return res
+        .status(400)
+        .json({ error: 'No user found, please check your ID' });
     let result = doc.exercises;
     const hasExercise = result.length > 0;
     result = result.filter(exercise =>
