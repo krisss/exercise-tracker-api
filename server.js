@@ -16,11 +16,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static('public'));
-app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/views/index.html`);
-});
-
 const newUserRoutes = require('./api/routes/register');
 const loginRoute = require('./api/routes/login');
 const addExerciseRoutes = require('./api/routes/add_exercise');

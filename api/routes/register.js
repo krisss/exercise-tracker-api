@@ -24,7 +24,9 @@ router.post('/', (req, res) => {
       .save()
       .then(result => {
         const { userName: dbUserName, _id, exercises, email: dbEmail } = result;
-        res.json({ userName: dbUserName, _id, exercises, email: dbEmail });
+        res
+          .status(200)
+          .json({ userName: dbUserName, _id, exercises, email: dbEmail });
       })
       .catch(err => {
         console.log(err.message);
